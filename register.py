@@ -1,54 +1,6 @@
 from tkinter import *
 
-
-
-def register_user():
-    username_info = username.get()
-    password_info = password.get()
-    # print(username_info)
-    # print(password_info)
-    file = open('user.txt', "a")
-    file.write(username_info + "\n")
-    file.write(password_info)
-    file.write("\n")
-    file.close()
-    username_entry.delete(0, END)
-    password_entry.delete(0, END)
-    Label(register_screen, text="Registration Successful!", width='300',
-          height='2', font=('Times New Roman', 20), fg='green').pack()
-
-def register():
-    global username
-    global password
-    global username_entry
-    global password_entry
-    global register_screen
-    register_screen = Toplevel(screen)
-    register_screen.title('Register')
-    register_screen.geometry('800x500')
-    username = StringVar()
-    password = StringVar()
-
-    Label(register_screen, text='Please enter details below to Register', width='300',
-          height='2', font=('Times New Roman', 20)).pack()
-    Label(register_screen, text='').pack()
-
-    Label(register_screen, text='Username *', width='300',
-          height='2', font=('Times New Roman', 20)).pack()
-    username_entry = Entry(register_screen, textvariable=username)
-    username_entry.pack()
-    Label(register_screen, text='').pack()
-
-    Label(register_screen, text='Password *', width='300',
-          height='2', font=('Times New Roman', 20)).pack()
-    password_entry = Entry(register_screen, textvariable=password, show='*')
-    password_entry.pack()
-    Label(register_screen, text='').pack()
-
-    Button(register_screen, text='Register', height='2', width='10', bg='grey',
-           font=('Times New Roman', 12), command=register_user).pack()
-
-
+#Function to create an entry box with given fields and on given screen
 def create_entry(screen_name, text_field, width_field, height_field, font_name, font_size, variable_name, entry_width):
     Label(screen_name, text=text_field, width=width_field,
           height=height_field, font=(font_name, font_size)).pack()
@@ -58,7 +10,7 @@ def create_entry(screen_name, text_field, width_field, height_field, font_name, 
     Label(screen_name, text='').pack()
     return field_name_entry
 
-
+#Function to store student details in a file
 def student_register_util():
     student_name_info = student_name.get()
     student_misno_info = student_misno.get()
@@ -78,12 +30,13 @@ def student_register_util():
     fs.write(student_fields[6] + ' - ' + student_dob_info + '\n')
     fs.write(student_fields[7] + ' - ' + student_aadharno_info + '\n')
     fs.write('\n')
-    Label(screen_name, text='').pack()
+    Label(student_register_screen, text='').pack()
     Label(student_register_screen, text="Student Registration Successful!", width='300',
           height='2', font=('Times New Roman', 20), fg='green').pack()
 
+#Function for student registration form
 def student_register():
-    # 'Admission Date' 'Secondary Email Address' remains doubtful to add
+    # 'Admission Date' 'Secondary Email Address' remains doubtful to add or not
     global student_fields 
     student_fields = ['Full Name', 'MIS Number', 'Mobile Number', 'Email Address', 'Year of Study', 'Branch', 'Date of Birth', 'Aadhar Number']
     global student_register_screen
@@ -112,7 +65,6 @@ def student_register():
     Label(student_register_screen, text='Please Enter Details below to Register as Student', width='300',
           height='2', bg='grey', font=('Times New Roman', 15)).pack()
     Label(student_register_screen, text='').pack()
-
     #Student full name
     student_name_entry = create_entry(student_register_screen, student_fields[0] + ' *', '300', '2', 'Times New Roman', 12, student_name, 100)
     print(student_name)
@@ -143,57 +95,12 @@ def student_register():
     student_aadharno_entry = create_entry(
         student_register_screen, student_fields[7] + ' *', '300', '2', 'Times New Roman', 12, student_aadharno, 100)
     print(student_aadharno)
-
+    #Submit button
     Button(student_register_screen, text='Submit', height='2', width='10', bg='green',
            font=('Times New Roman', 14), command=student_register_util).pack()
 
 def faculty_register():
     pass
-
-'''
-Not to be used for now...
-
-def login_verify():
-    # print('working')
-    username1 = username_verify.get()
-    password1 = password_verify.get()
-    username_login_entry.delete(0, END)
-    password_login_entry.delete(0, END)
-
-
-def login():
-    global username_verify
-    global password_verify
-    global username_login_entry
-    global password_login_entry
-    login_screen = Toplevel(screen)
-    login_screen.title("Login")
-    login_screen.geometry("800x500")
-    Label(login_screen, text='Please enter details below to Login', width='300',
-          height='2', font=('Times New Roman', 20)).pack()
-    Label(login_screen, text="").pack()
-
-    username_verify = StringVar()
-    password_verify = StringVar()
-
-    Label(login_screen, text='Username *', width='300',
-          height='2', font=('Times New Roman', 20)).pack()
-    username_login_entry = Entry(login_screen, textvariable=username_verify)
-    username_login_entry.pack()
-    Label(login_screen, text="").pack()
-
-    Label(login_screen, text='Password *', width='300',
-          height='2', font=('Times New Roman', 20)).pack()
-    password__login_entry = Entry(
-        login_screen, textvariable=password_verify, show='*')
-    password__login_entry.pack()
-    Label(login_screen, text="").pack()
-
-    Button(login_screen, text='Login', height='2', width='10', bg='grey',
-           font=('Times New Roman', 12), command=login_verify).pack()
-
-'''
-
 
 
 def main_screen():
