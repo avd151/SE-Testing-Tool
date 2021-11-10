@@ -99,8 +99,53 @@ def student_register():
     Button(student_register_screen, text='Submit', height='2', width='10', bg='green',
            font=('Times New Roman', 14), command=student_register_util).pack()
 
+#Stores faculty details
+def faculty_register_util():
+    fac_name_info = fac_name.get()
+    fac_mobileno_info = fac_mobileno.get()
+    fac_aadharno_info = fac_aadharno.get()
+    fac_dept_info = fac_dept.get()
+    fs = open('student_info.txt', 'a')
+    fs.write(fac_fields[0] + ' - ' + fac_name_info + '\n')
+    fs.write(fac_fields[1] + ' - ' + fac_mobileno_info + '\n')
+    fs.write(fac_fields[2] + ' - ' + fac_emailaddr_info + '\n')
+    fs.write(fac_fields[3] + ' - ' + fac_dept_info + '\n')
+    Label(screen_name, text='').pack()
+    Label(fac_register_screen, text="Faculty Registration Successful!", width='300',
+          height='2', font=('Times New Roman', 20), fg='green').pack()
+    
 def faculty_register():
-    pass
+    global fac_fields 
+    fac_fields = ['Full Name','Mobile Number','Aadhar Number', 'Department']
+    global fac_register_screen
+    fac_register_screen = Toplevel(screen)
+    fac_register_screen.title('Faculty Registration Form')
+    fac_register_screen.geometry('800x1200')
+    fac_register_screen.state('zoomed')
+    global fac_name
+    global fac_mobileno
+    global fac_aadharno
+    global fac_dept
+    fac_name = StringVar()
+    fac_aadharno = StringVar()
+    fac_mobileno = StringVar()
+    fac_dept = StringVar()
+    #Faculty name
+    fac_name_entry = create_entry(fac_register_screen, fac_fields[0] + ' *', '300', '2', 'Times New Roman', 12, fac_name, 100)
+    print(fac_name)
+    #Faculty mobile
+    fac_mobile_entry = create_entry(fac_register_screen, fac_fields[1] + ' *', '300', '2', 'Times New Roman', 12, fac_mobileno, 100)
+    print(fac_mobileno)
+    #Faculty aadhar
+    fac_aadhar_entry = create_entry(
+        fac_register_screen, fac_fields[2] + ' *', '300', '2', 'Times New Roman', 12, fac_aadharno, 100)
+    print(fac_aadharno)
+    #Faculty Department
+    fac_dept_entry = create_entry(
+        fac_register_screen, fac_fields[3] + ' *', '300', '2', 'Times New Roman', 12, fac_dept, 100)
+    Button(fac_register_screen, text='Submit', height='2', width='10', bg='green',
+           font=('Times New Roman', 14), command=faculty_register_util).pack()
+
 
 
 def main_screen():
