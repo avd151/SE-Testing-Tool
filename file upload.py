@@ -22,4 +22,3 @@ msbtn = Button(ws, text ='Choose File', command = lambda:open_file());msbtn.grid
 upld = Button(ws, text='Upload Files', command=uploadFiles)
 upld.grid(row=3, columnspan=3, pady=10)
 ws.mainloop()
-''''''
