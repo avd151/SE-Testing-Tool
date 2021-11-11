@@ -1,4 +1,9 @@
 from tkinter import *
+import mysql.connector
+
+mysqldb=mysql.connector.connect(host="localhost",user="root",password="",database="se_cms")
+mycursor=mysqldb.cursor()
+
 
 #Function to create an entry box with given fields and on given screen
 def create_entry(screen_name, text_field, width_field, height_field, font_name, font_size, variable_name, entry_width):
@@ -33,7 +38,24 @@ def student_register_util():
     Label(student_register_screen, text='').pack()
     Label(student_register_screen, text="Student Registration Successful!", width='300',
           height='2', font=('Times New Roman', 20), fg='green').pack()
-
+    try:
+        #student dob is doubtful
+        sql = "INSERT INTO  student (stud_misno, stud_name, stud_mobileno, stud_year) VALUES (%s, %s, %s, %s)"
+        val = (student_misno_info, student_name_info, student_mobileno_info, student_year_info)
+        mycursor.execute(sql, val)
+        mysqldb.commit()
+        lastid = mycursor.lastrowid
+        print("Saving successful")
+        # messagebox.showinfo("information", "Student Record Saved Successfully")
+    #    e1.delete(0, END)
+    #    e2.delete(0, END)
+    #    e3.delete(0, END)
+    #    e4.delete(0, END)
+    #    e1.focus_set()
+    except Exception as e:
+        print(e)
+        mysqldb.rollback()
+        mysqldb.close()
 #Function for student registration form
 def student_register():
     # 'Admission Date' 'Secondary Email Address' remains doubtful to add or not
@@ -62,7 +84,7 @@ def student_register():
     student_dob = StringVar()
     student_aadharno = StringVar()
     #Label
-    Label(student_register_screen, text='Please Enter Details below to Register as Student', width='300',
+    Label(student_register_screen, text='Please Enter Details below', width='300',
           height='2', bg='grey', font=('Times New Roman', 15)).pack()
     Label(student_register_screen, text='').pack()
     #Student full name
@@ -105,7 +127,7 @@ def faculty_register_util():
     fac_mobileno_info = fac_mobileno.get()
     fac_aadharno_info = fac_aadharno.get()
     fac_dept_info = fac_dept.get()
-    fs = open('student_info.txt', 'a')
+    fs = open('faculty_info.txt', 'a')
     fs.write(fac_fields[0] + ' - ' + fac_name_info + '\n')
     fs.write(fac_fields[1] + ' - ' + fac_mobileno_info + '\n')
     fs.write(fac_fields[2] + ' - ' + fac_emailaddr_info + '\n')
@@ -130,6 +152,10 @@ def faculty_register():
     fac_aadharno = StringVar()
     fac_mobileno = StringVar()
     fac_dept = StringVar()
+    #Label
+    Label(fac_register_screen, text='Please Enter Details below', width='300',
+          height='2', bg='grey', font=('Times New Roman', 15)).pack()
+    Label(fac_register_screen, text='').pack()
     #Faculty name
     fac_name_entry = create_entry(fac_register_screen, fac_fields[0] + ' *', '300', '2', 'Times New Roman', 12, fac_name, 100)
     print(fac_name)
