@@ -28,15 +28,12 @@ def create_entry(screen_name, text_field, width_field, height_field, font_name, 
 
 def validate_email(email_addr):
     if '@coep.ac.in' in email_addr:
+        print('Input: {}'.format(email_addr))
+        print('Output: Given email address is a valid email address\n')
         return True
     else:
-        return False
-
-
-def validate_mobileno(mobile_no):
-    if len(mobile_no) == 10:
-        return True
-    else:
+        print('Input: {}'.format(email_addr))
+        print('Given email address is not correct, please check if @coep.ac.in is written correctly\n')
         return False
 
 
@@ -45,6 +42,8 @@ def valid_date(date):
         # print(date)
         return True
     else:
+        print('Input: {}'.format(date))
+        print('Output: Please enter valid date value, between 1 and 31\n')
         return False
 
 
@@ -53,6 +52,8 @@ def valid_month(month):
         # print(month)
         return True
     else:
+        print('Input: {}'.format(month))
+        print('Output: Please enter valid month value, between 1 and 12\n')
         return False
 
 
@@ -62,8 +63,12 @@ def validate_dob(dob):
         if (len(date_det) != 3):
             return False
         elif (valid_date(date_det[0]) and valid_month(date_det[1]) and int(date_det[2]) <= 2003):
+            print('Input: {}'.format(dob))
+            print('Output: Given date of birth is valid and correct. You are eligible to join college\n')
             return True
         else:
+            print('Input: {}'.format(dob))
+            print('Output: Please enter valid year value.If it is still correct, you are below 18 years of age, and not eligible to join the college\n')
             return False
     else:
         return False
@@ -71,23 +76,47 @@ def validate_dob(dob):
 
 def validate_aadhar(aadhar):
     if len(aadhar) == 12:
+        print('Input: {}'.format(aadhar))
+        print('Output: Given Aadhar Card no. is correct\n')
         return True
     else:
+        print('Input: {}'.format(aadhar))
+        print('Output: Given Aadhar Card no. is not correct, please enter valid 9 digit mis number\n')
         return False
 
 
 def validate_misno(misno):
     if len(misno) == 9:
+        print('Input: {}'.format(misno))
+        print('Output: Given MIS is correct\n')
         return True
     else:
+        print('Input: {}'.format(misno))
+        print('Output: Given MIS is not correct, please enter valid 9 digit mis number\n')
+        return False
+
+
+
+def validate_mobileno(mobile_no):
+    if len(mobile_no) == 10:
+        print('Input: {}'.format(mobile_no))
+        print('Output: Given Mobile Number is correct\n')
+        return True
+    else:
+        print('Input: {}'.format(mobile_no))
+        print('Output: Given Mobile number is not  correct, please enter valid 10 digit mobile number\n')
         return False
 
 
 def validate_extension(file_name):
     extension = mimetypes.guess_type(file_name)[0]
-    if(extension == 'application/pdf'):
+    if(extension== 'application/pdf'):
+        print('Input: {}'.format(file_name))
+        print('Output: Given File is valid\n')
         return True
     else:
+        print('Input: {}'.format(file_name))
+        print('Output: Given File is not Valid, please upload marksheet in pdf format\n')
         return False
 
 def student_all_reqd(name, mis, mobile, email, year, branch, dob):
