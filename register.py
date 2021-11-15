@@ -1,7 +1,7 @@
 from tkinter import *
 import mysql.connector
 from tkinter import messagebox
-
+import mimetypes
 
 mysqldb = mysql.connector.connect(
     host="localhost", user="root", password="", database="se_cms")
@@ -42,6 +42,7 @@ def validate_mobileno(mobile_no):
 
 def valid_date(date):
     if(int(date) >= 1 and int(date) <= 31):
+        # print(date)
         return True
     else:
         return False
@@ -49,6 +50,7 @@ def valid_date(date):
 
 def valid_month(month):
     if(int(month) >= 1 and int(month) <= 12):
+        # print(month)
         return True
     else:
         return False
@@ -59,7 +61,7 @@ def validate_dob(dob):
         date_det = dob.split('-')
         if (len(date_det) != 3):
             return False
-        elif (valid_date(date_det[0]) and valid_month(date_det[0]) and int(date_det[2]) <= 2003):
+        elif (valid_date(date_det[0]) and valid_month(date_det[1]) and int(date_det[2]) <= 2003):
             return True
         else:
             return False
@@ -80,6 +82,13 @@ def validate_misno(misno):
     else:
         return False
 
+
+def validate_extension(file_name):
+    extension = mimetypes.guess_type(file_name)[0]
+    if(extension == 'application/pdf'):
+        return True
+    else:
+        return False
 
 def student_all_reqd(name, mis, mobile, email, year, branch, dob):
     if (name == '' or mis == '' or mobile == '' or email == '' or year == '' or branch == '' or dob == ''):

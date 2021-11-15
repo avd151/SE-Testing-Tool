@@ -38,6 +38,22 @@ class TestRegister(unittest.TestCase):
         self.assertEqual(register.validate_misno('12345678911100'), False)
         self.assertEqual(register.validate_misno('1234'), False)
 
+    #Test extension Validation - test if file uploaded is pdf or not
+    def test_validate_extension(self):
+        self.assertEqual(register.validate_extension('abc.pdf'), True)
+        self.assertEqual(register.validate_extension('pqr.pdf'), True)
+        self.assertEqual(register.validate_extension('abc.txt'), False)
+        self.assertEqual(register.validate_extension('pqr.txt'), False)
+        self.assertEqual(register.validate_extension('pqr.png'), False)
     
+    #Test Date of Birth Validation
+    def test_validate_dob(self):
+        self.assertEqual(register.validate_dob('12-01-2001'), True)
+        self.assertEqual(register.validate_dob('12-31-2001'), False)
+        self.assertEqual(register.validate_dob('14-07-2005'), False)
+        self.assertEqual(register.validate_dob('30-03-2000'), True)
+        self.assertEqual(register.validate_dob('12-01-2010'), False)
+
+
 if __name__ == '__main__':
     unittest.main()
